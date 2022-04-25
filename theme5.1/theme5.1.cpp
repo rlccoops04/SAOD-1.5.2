@@ -83,14 +83,38 @@ int main()
     std::cin >> N;
     TNode* pRoot = nullptr;
     AddNodes(pRoot, N);
-    std::cout << "Обратно - симметричный обход: " << std::endl;
-    DisplayBackSymmetric(pRoot, 0);
-    std::cout << "\n\n";
-    std::cout << "Симметричный обход: " << std::endl;
-    DisplaySymmetric(pRoot, 0);
-    std::cout << "\n\n";
-    std::cout << "Прямой обход: " << std::endl;
-    DisplayForward(pRoot, 0);
-    ClearMemory(pRoot);
+    bool menu = true;
+    int choicemenu;
+    while (menu)
+    {
+        std::cout << "1) Обратно - симметричный обход.\n"
+            "2) Симметричный обход.\n"
+            "3) Прямой обход.\n"
+            "4) Выход.\n\n"
+            "Ввод: ";
+        std::cin >> choicemenu;
+        switch (choicemenu)
+        {
+        case 1:
+            std::cout << "Обратно - симметричный обход: " << std::endl;
+            DisplayBackSymmetric(pRoot, 0);
+            std::cout << "\n\n";
+            break;
+        case 2:
+            std::cout << "Симметричный обход: " << std::endl;
+            DisplaySymmetric(pRoot, 0);
+            std::cout << "\n\n";
+            break;
+        case 3:
+            std::cout << "Прямой обход: " << std::endl;
+            DisplayForward(pRoot, 0);
+            std::cout << "\n\n";
+            break;
+        default:
+            menu = false;
+            ClearMemory(pRoot);
+            break;
+        }
+    }
 }
 

@@ -13,14 +13,7 @@ struct StackElement
 };
 bool isEmpty(StackElement* stack)
 {
-    if (stack == NULL)
-    {
-        return true;
-    }
-    else
-    {
-        return false;
-    }
+    return stack == NULL;
 }
 void push(TNode* data, StackElement*& stack)
 {
@@ -88,7 +81,6 @@ void DisplaySymmetric(TNode* pCurrent, StackElement* stack)
             std::cout << pCurrent->data << std::endl;
             pCurrent = pCurrent->pRight;
         }
-
     }
 }
 void ClearMemory(TNode*& pCurrent)
@@ -100,16 +92,73 @@ void ClearMemory(TNode*& pCurrent)
         delete pCurrent;
     }
 }
+void DisplayBackSymmetric(TNode* pCurrent, int lvl)
+{
+    if (pCurrent != nullptr)
+    {
+        lvl++;
+        DisplayBackSymmetric(pCurrent->pRight, lvl);
+        for (int i = 0; i < lvl - 1; i++)
+        {
+            std::cout << "     ";
+        }
+        std::cout << pCurrent->data << std::endl;
+        DisplayBackSymmetric(pCurrent->pLeft, lvl);
+
+    }
+}
+void DisplayForward(TNode* pCurrent, int lvl)
+{
+    if (pCurrent != nullptr)
+    {
+        for (int i = 0; i < lvl; i++)
+        {
+            std::cout << "     ";
+        }
+        std::cout << pCurrent->data << std::endl;
+        DisplayForward(pCurrent->pLeft, lvl + 1);
+        DisplayForward(pCurrent->pRight, lvl + 1);
+    }
+}
 int main()
 {
     setlocale(LC_ALL, "RUSSIAN");
-    StackElement* helpstack = NULL;
     int N;
     std::cout << "Введите количество вершин: ";
     std::cin >> N;
     TNode* pRoot = nullptr;
     AddNodes(pRoot, N);
-    std::cout << "Симметричный обход: " << std::endl;
-    DisplaySymmetric(pRoot, 0);
-    ClearMemory(pRoot);
+    bool menu = true;
+    int choicemenu;
+    while (menu)
+    {
+        std::cout << "1) Обратно - симметричный обход.\n"
+            "2) Симметричный обход.\n"
+            "3) Прямой обход.\n"
+            "4) Выход.\n\n"
+            "Ввод: ";
+        std::cin >> choicemenu;
+        switch (choicemenu)
+        {
+        case 1:
+            std::cout << "Обратно - симметричный обход: " << std::endl;
+            DisplayBackSymmetric(pRoot, 0);
+            std::cout << "\n\n";
+            break;
+        case 2:
+            std::cout << "Симметричный обход: " << std::endl;
+            DisplaySymmetric(pRoot, 0);
+            std::cout << "\n\n";
+            break;
+        case 3:
+            std::cout << "Прямой обход: " << std::endl;
+            DisplayForward(pRoot, 0);
+            std::cout << "\n\n";
+            break;
+        default:
+            menu = false;
+            ClearMemory(pRoot);
+            break;
+        }
+    }
 }

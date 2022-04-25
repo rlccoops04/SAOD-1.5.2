@@ -7,6 +7,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "theme5.1", "theme5.1\theme5
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "theme5.3", "theme5.3\theme5.3.vcxproj", "{AD1F7709-62EE-4B75-8E49-D3EB89148C4E}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "theme1.5.3", "theme1.5.3\theme1.5.3.vcxproj", "{62251403-253F-4271-91B4-49811E2ED9A3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -31,6 +33,14 @@ Global
 		{AD1F7709-62EE-4B75-8E49-D3EB89148C4E}.Release|x64.Build.0 = Release|x64
 		{AD1F7709-62EE-4B75-8E49-D3EB89148C4E}.Release|x86.ActiveCfg = Release|Win32
 		{AD1F7709-62EE-4B75-8E49-D3EB89148C4E}.Release|x86.Build.0 = Release|Win32
+		{62251403-253F-4271-91B4-49811E2ED9A3}.Debug|x64.ActiveCfg = Debug|x64
+		{62251403-253F-4271-91B4-49811E2ED9A3}.Debug|x64.Build.0 = Debug|x64
+		{62251403-253F-4271-91B4-49811E2ED9A3}.Debug|x86.ActiveCfg = Debug|Win32
+		{62251403-253F-4271-91B4-49811E2ED9A3}.Debug|x86.Build.0 = Debug|Win32
+		{62251403-253F-4271-91B4-49811E2ED9A3}.Release|x64.ActiveCfg = Release|x64
+		{62251403-253F-4271-91B4-49811E2ED9A3}.Release|x64.Build.0 = Release|x64
+		{62251403-253F-4271-91B4-49811E2ED9A3}.Release|x86.ActiveCfg = Release|Win32
+		{62251403-253F-4271-91B4-49811E2ED9A3}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
