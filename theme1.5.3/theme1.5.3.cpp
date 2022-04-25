@@ -16,12 +16,13 @@ bool isEmpty(TNode* pRoot)
         return false;
     }
 }
-void SearchNode(TNode* pCurrent, int searchdata, TNode*& pSearched)
+void searchNode(TNode* pCurrent, int searchdata, TNode*& pSearched)
 {
+    TNode* pTemp;
     bool Stop = false;
-    while (not Stop)
+    if (not Stop)
     {
-        TNode* pTemp = pCurrent;
+        pTemp = pCurrent;
         if (pTemp != nullptr)
         {
             if (pTemp->data == searchdata)
@@ -31,23 +32,22 @@ void SearchNode(TNode* pCurrent, int searchdata, TNode*& pSearched)
             }
             else
             {
-                SearchNode(pTemp->pLeft, searchdata, pSearched);
-                SearchNode(pTemp->pRight, searchdata, pSearched);
+                searchNode(pTemp->pLeft, searchdata, pSearched);
+                searchNode(pTemp->pRight, searchdata, pSearched);
             }
         }
     }
 }
-void AddNode(TNode* pRoot, int searchdata, int newdata)
+void addNode(TNode*& pRoot, int searchdata, int newdata)
 {
     if (isEmpty(pRoot))
     {
-        TNode* pRoot = new TNode{ newdata,nullptr,nullptr };
+        pRoot = new TNode{ newdata,nullptr,nullptr };
     }
     else
     {
         TNode* pCurrent;
-        int choicenapr;
-        SearchNode(pRoot, searchdata, pCurrent);
+        searchNode(pRoot, searchdata, pCurrent);
         if (pCurrent->pLeft != nullptr && pCurrent->pRight != nullptr)
         {
             std::cout << "Невозможно добавить потомка." << std::endl;
@@ -66,9 +66,10 @@ void AddNode(TNode* pRoot, int searchdata, int newdata)
         }
         else if (pCurrent->pLeft == nullptr && pCurrent->pRight == nullptr)
         {
+            int choiceway;
             std::cout << "Добавить левого (1) или правого (2) потомка: ";
-            std::cin >> choicenapr;
-            if (choicenapr == 1)
+            std::cin >> choiceway;
+            if (choiceway == 1)
             {
                 TNode* pTemp = new TNode();
                 pCurrent->pLeft = pTemp;
@@ -83,35 +84,72 @@ void AddNode(TNode* pRoot, int searchdata, int newdata)
         }
     }
 }
-void DisplayBackSymmetric(TNode* pCurrent, int lvl)
+void displayBackSymmetric(TNode* pCurrent, int lvl)
 {
     if (pCurrent != nullptr)
     {
         lvl++;
-        DisplayBackSymmetric(pCurrent->pRight, lvl);
+        displayBackSymmetric(pCurrent->pRight, lvl);
         for (int i = 0; i < lvl - 1; i++)
         {
             std::cout << "     ";
         }
         std::cout << pCurrent->data << std::endl;
-        DisplayBackSymmetric(pCurrent->pLeft, lvl);
+        displayBackSymmetric(pCurrent->pLeft, lvl);
     }
 }
-void ClearMemory(TNode*& pCurrent)
+void clearMemory(TNode*& pCurrent)
 {
     if (pCurrent != nullptr)
     {
-        ClearMemory(pCurrent->pLeft);
-        ClearMemory(pCurrent->pRight);
+        clearMemory(pCurrent->pLeft);
+        clearMemory(pCurrent->pRight);
         delete pCurrent;
     }
 }
 int main()
 {
     setlocale(LC_ALL, "RUSSIAN");
-    std::cout << "Симметричный обход: " << std::endl;
-    DisplayBackSymmetric(pRoot, 0);
-    ClearMemory(pRoot);
+    TNode* pRoot = NULL;
+    bool menu = true;
+    int choicemenu;
+    int searchdata;
+    int newdata;
+    while (menu)
+    {
+        std::cout << "1) Добавление вершины\n"
+            "2) Построчный вывод дерева с помощью основных правил обхода\n"
+            "3) Уничтожение всего дерева"
+            "4) Выход" << std::endl;
+        std::cin >> choicemenu;
+        switch (choicemenu)
+        {
+        case 1:
+            std::cout << "Введите информационную часть вершины: ";
+            std::cin >> newdata;
+            if (isEmpty(pRoot))
+            {
+                addNode(pRoot, 1, newdata);
+            }
+            else
+            {
+                std::cout << "Для какой вершины добавить потомков: ";
+                std::cin >> searchdata;
+                addNode(pRoot, searchdata, newdata);
+            }
+            break;
+        case 2:
+            displayBackSymmetric(pRoot, 0);
+            break;
+        case 3:
+            clearMemory(pRoot);
+            break;
+        default:
+            clearMemory(pRoot);
+            menu = false;
+            break;
+        }
+    }
 }
 
 
